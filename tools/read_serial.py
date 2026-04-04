@@ -1,0 +1,1 @@
+# Python Script for reading serial data from an ESP32-S3 and printing it to the console. For debugging purposes.
