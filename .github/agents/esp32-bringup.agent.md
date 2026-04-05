@@ -33,10 +33,11 @@ Your job is to make practical, low-risk progress on firmware initialization, run
    - `pio run`
    - `pio run -t upload`
    - `pio run -t monitor`
-4. For serial diagnostics from repo root, prefer `sg dialout -c 'cd <repo> && python tools/read_serial.py'` to keep monitoring stable across USB re-enumeration.
-5. During reset tests, verify disconnect and reconnect messages plus resumed `BOOT` logs with restarted uptime.
-6. Keep serial logs prefix-stable and consistent across touched code paths.
-7. Report concrete outcomes, hardware risks, and next validation steps.
+4. Prefer StreamIO-style serial monitoring via PlatformIO monitor on `/dev/esp32-1` when host udev mapping exists.
+5. Use `python tools/read_serial.py` as fallback for reset diagnostics and USB re-enumeration recovery.
+6. During reset tests, verify disconnect and reconnect messages plus resumed `BOOT` logs with restarted uptime.
+7. Keep serial logs prefix-stable and consistent across touched code paths.
+8. Report concrete outcomes, hardware risks, and next validation steps.
 
 ## Output Format
 - Goal

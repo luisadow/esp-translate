@@ -17,8 +17,8 @@
   - `pio run -t upload`
   - `pio run -t monitor`
 - Keep the existing PlatformIO environment name and base assumptions from `firmware/platformio.ini`.
-- Use `python tools/read_serial.py` from repo root when serial logging support is needed.
-- For reset and USB re-enumeration tests, prefer `sg dialout -c 'cd <repo> && python tools/read_serial.py'` so logs survive `/dev/ttyACM*` renumbering.
+- Prefer StreamIO-style serial monitoring via PlatformIO monitor on fixed symlink when available: `sg dialout -c 'cd <repo>/firmware && pio device monitor -p /dev/esp32-1 -b 115200'`.
+- Use `python tools/read_serial.py` from repo root as fallback for reset and USB re-enumeration diagnostics.
 - Do not invent backend run/test commands until backend code exists.
 
 ## PlatformIO And Hardware Conventions
@@ -27,6 +27,7 @@
   - monitor speed: `115200`
   - partitions: `default_16MB.csv`
   - PSRAM flags/configuration
+- Keep host udev mapping stable for serial work: `/etc/udev/rules.d/99-esp32-1.rules` should provide `/dev/esp32-1`.
 - Do not change board, flash/partition, or PSRAM settings unless explicitly requested.
 - For firmware features, prefer non-blocking control flow (avoid long `delay(...)` calls in runtime paths).
 - Add serial logs that help hardware bring-up and integration debugging.
