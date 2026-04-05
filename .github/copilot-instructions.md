@@ -6,23 +6,23 @@
 - When requirements are unclear, prefer assumptions that keep firmware stable and resource-aware on ESP32-S3.
 
 ## Architecture
-- `firmware/` is the active implementation area (PlatformIO + Arduino, ESP32-S3 target).
+- PlatformIO firmware is rooted at repository top level (`platformio.ini`, `src/`, `include/`, `lib/`, `test/`).
 - `backend/` exists as a scaffold and is not implemented yet (`backend/app/` and `backend/requirements.txt` are currently empty).
 - `tools/` contains developer utilities such as serial debugging (`tools/read_serial.py`).
 - For product context, hardware roadmap, and system intent, link to `docs/context.md` instead of duplicating it.
 
 ## Build And Test
-- Run firmware commands from `firmware/`:
+- Run firmware commands from repository root:
   - `pio run`
   - `pio run -t upload`
   - `pio run -t monitor`
-- Keep the existing PlatformIO environment name and base assumptions from `firmware/platformio.ini`.
-- Prefer StreamIO-style serial monitoring via PlatformIO monitor on fixed symlink when available: `sg dialout -c 'cd <repo>/firmware && pio device monitor -p /dev/esp32-1 -b 115200'`.
+- Keep the existing PlatformIO environment name and base assumptions from `platformio.ini`.
+- Prefer StreamIO-style serial monitoring via PlatformIO monitor on fixed symlink when available: `sg dialout -c 'cd <repo> && pio device monitor -p /dev/esp32-1 -b 115200'`.
 - Use `python tools/read_serial.py` from repo root as fallback for reset and USB re-enumeration diagnostics.
 - Do not invent backend run/test commands until backend code exists.
 
 ## PlatformIO And Hardware Conventions
-- Treat `firmware/platformio.ini` hardware settings as intentional defaults:
+- Treat `platformio.ini` hardware settings as intentional defaults:
   - board: `esp32-s3-devkitc-1`
   - monitor speed: `115200`
   - partitions: `default_16MB.csv`

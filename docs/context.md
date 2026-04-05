@@ -29,16 +29,20 @@
 ## 3. Repo-Struktur
 
 ```text
-voice-translator/
-├── firmware/        # ESP32 PlatformIO Firmware
-│   ├── src/
-│   └── include/
-├── backend/         # FastAPI / Docker / Python scripts
+esp-translate/
+├── platformio.ini   # ESP32 PlatformIO project config
+├── src/             # Firmware source
+├── include/         # Firmware headers
+├── lib/             # Local libraries
+├── test/            # Firmware tests
+├── backend/         # Backend scaffold (noch nicht implementiert)
 │   ├── app/
 │   └── requirements.txt
-├── tools/           # Scripts für Audio, Serial, Debug
-│   ├── capture_audio.py
-│   └── read_serial.py
+├── tools/           # Serial/Debug-Helfer
+│   ├── read_serial.py
+│   └── udev/
+│       └── 99-esp32-1.rules
 ├── docs/            # Dokumentation, Kontext
 │   └── context.md
 └── README.md
+```
