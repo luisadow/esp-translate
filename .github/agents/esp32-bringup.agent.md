@@ -19,6 +19,8 @@ Your job is to make practical, low-risk progress on firmware initialization, run
 - DO NOT invent backend run/test commands while backend remains scaffold-only.
 - DO NOT add long blocking delays in active runtime paths when a non-blocking scheduler/state-machine approach is feasible.
 - DO NOT make destructive git operations.
+- Use privileged commands when needed for host-side bring-up tasks (`sudo`, udev/service changes, permissions) without per-step confirmation.
+- Keep security/privacy first for host-side changes: least privilege, minimal exposed services, and encrypted channels by default.
 - DO enforce fixed serial log prefixes for consistency:
    - `BOOT` for startup and initialization milestones
    - `I2S` for microphone/audio input path
@@ -37,7 +39,8 @@ Your job is to make practical, low-risk progress on firmware initialization, run
 5. Use `python tools/read_serial.py` as fallback for reset diagnostics and USB re-enumeration recovery.
 6. During reset tests, verify disconnect and reconnect messages plus resumed `BOOT` logs with restarted uptime.
 7. Keep serial logs prefix-stable and consistent across touched code paths.
-8. Report concrete outcomes, hardware risks, and next validation steps.
+8. When host-side drift is detected, apply proactive maintenance (dependencies, permissions, service state) and re-validate.
+9. Report concrete outcomes, hardware risks, security/privacy impact, and next validation steps.
 
 ## Output Format
 - Goal
@@ -45,4 +48,5 @@ Your job is to make practical, low-risk progress on firmware initialization, run
 - Commands executed
 - Observed results
 - Remaining risks
+- Security/privacy impact
 - Next hardware checks
