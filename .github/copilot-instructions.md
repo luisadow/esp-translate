@@ -18,13 +18,14 @@
   - `pio run -t monitor`
 - Keep the existing PlatformIO environment name and base assumptions from `firmware/platformio.ini`.
 - Use `python tools/read_serial.py` from repo root when serial logging support is needed.
+- For reset and USB re-enumeration tests, prefer `sg dialout -c 'cd <repo> && python tools/read_serial.py'` so logs survive `/dev/ttyACM*` renumbering.
 - Do not invent backend run/test commands until backend code exists.
 
 ## PlatformIO And Hardware Conventions
 - Treat `firmware/platformio.ini` hardware settings as intentional defaults:
   - board: `esp32-s3-devkitc-1`
   - monitor speed: `115200`
-  - partitions: `default_16M.csv`
+  - partitions: `default_16MB.csv`
   - PSRAM flags/configuration
 - Do not change board, flash/partition, or PSRAM settings unless explicitly requested.
 - For firmware features, prefer non-blocking control flow (avoid long `delay(...)` calls in runtime paths).

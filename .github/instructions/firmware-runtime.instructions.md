@@ -13,9 +13,11 @@ applyTo:
   - Log boot and subsystem initialization milestones.
   - Log recoverable hardware and communication errors with enough context to troubleshoot quickly.
   - Keep log volume practical for `115200` monitor speed.
+- Prefer stable serial paths (`/dev/serial/by-id/...`) for monitoring and tools; avoid hard-coding volatile `/dev/ttyACM*` paths when auto-detection is feasible.
+- For reset behavior validation, use `tools/read_serial.py` and confirm the sequence: disconnect event, reconnect event, and fresh `BOOT` logs with restarted uptime.
 - Preserve hardware defaults from `firmware/platformio.ini` unless the task explicitly asks for config changes:
   - board: `esp32-s3-devkitc-1`
-  - partitions: `default_16M.csv`
+  - partitions: `default_16MB.csv`
   - PSRAM settings
 - When adding dependencies, declare them explicitly in PlatformIO config and keep choices minimal.
 - Prefer clear setup/loop boundaries:
